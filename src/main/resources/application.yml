@@ -1,0 +1,44 @@
+elastic-job:
+  zookeeper:
+    # zk服务地址
+    server: localhost:2181
+    # zk命名空间
+    namespace: mySimpleJob
+    # 等待重试的间隔时间的初始值 默认1000，单位：毫秒
+    baseSleepTimeMilliseconds: 1000
+    # 等待重试的间隔时间的最大值 默认3000，单位：毫秒
+    maxSleepTimeMilliseconds: 3000
+    # 最大重试次数 默认3
+    maxRetries: 3
+    # 会话超时时间 默认60000，单位：毫秒
+    sessionTimeoutMilliseconds: 60000
+    # 连接超时时间 默认15000，单位：毫秒
+    connectionTimeoutMilliseconds: 15000
+
+
+spring:
+  ## 数据源配置
+  datasource: # 数据库的数据配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # url
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: root
+
+# mybatis-plus配置
+mybatis-plus:
+  # mapper.xml路径
+  mapper-locations: classpath*:mapper/**/*.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.hzw.code.fast.entity
+  global-config:
+    db-config:
+      # 驼峰下划线转换
+      table-underline: true
+  configuration:
+    # 配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（如不开启，SQL需要写as： select user_id as userId）
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    # 打印sql配置
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
